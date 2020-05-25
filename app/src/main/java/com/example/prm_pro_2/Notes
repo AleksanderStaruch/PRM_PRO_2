@@ -1,0 +1,43 @@
+fun writeToDataBase(photo: Photo){
+            try {
+                Room.databaseBuilder(context, PhotoDb::class.java, "photos.db").build().let {
+                    thread { it.getPhotoDao().insert(photo) }
+                }
+            }catch (e: Exception){
+                Log.println(Log.ERROR,"######weadDataBase","DB null1")
+            }
+//        val path= "database.txt"
+//        var tmpStr = readDataBase()
+//
+//        val fileOutputStream: FileOutputStream = openFileOutput(path, Context.MODE_PRIVATE)
+//        tmpStr+=photo.toString() + "\r\n"
+//        fileOutputStream.write(tmpStr.toByteArray())
+//        fileOutputStream.flush()
+//        fileOutputStream.close()
+        }
+
+        fun readDataBase(){
+            try {
+                Room.databaseBuilder(context, PhotoDb::class.java, "photos.db").build().let {
+                    thread { Log.println(Log.ERROR,"######readDataBase",""+it.getPhotoDao().selectAll()) }
+                }
+            }catch (e: Exception){
+                Log.println(Log.ERROR,"######readDataBase","DB null2")
+            }
+//        return try {
+//            val path = "database.txt"
+//            val fileInputStream: FileInputStream = openFileInput(path)
+//            var text = ""
+//            while (fileInputStream.available() > 0) {
+//                text+=fileInputStream.read().toChar()
+//            }
+////            Log.println(Log.ERROR,"######readDataBase",""+text)
+//            fileInputStream.close()
+//            text
+//        }catch (e: Exception){
+//            ""
+//        }
+        }
+    }
+
+
