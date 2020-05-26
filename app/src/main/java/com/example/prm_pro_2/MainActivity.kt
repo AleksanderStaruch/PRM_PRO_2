@@ -12,6 +12,11 @@ class MainActivity : AppCompatActivity() {
         var green = 0
         var blue = 0
         var size = 10
+        var km = 1
+    }
+
+    fun locationNotifiaction(){
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,12 +43,14 @@ class MainActivity : AppCompatActivity() {
             }
             startActivity(intent)
         }
+
         settings.setOnClickListener {
             val intent = Intent(this, SettingsActivity::class.java).apply {
                 putExtra("R",""+red)
                 putExtra("G",""+green)
                 putExtra("B",""+blue)
                 putExtra("S",""+size)
+                putExtra("KM",""+km)
             }
             startActivity(intent)
         }

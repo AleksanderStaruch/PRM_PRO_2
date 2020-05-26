@@ -13,6 +13,7 @@ class SettingsActivity : AppCompatActivity() {
     private var oldGreen = 0
     private var oldBlue = 0
     private var oldSize = 0
+    private var oldKM = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,6 +21,7 @@ class SettingsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_settings)
 
         val size = findViewById<EditText>(R.id.s_fontSize)
+        val editKM = findViewById<EditText>(R.id.s_KM)
 
         val red = findViewById<SeekBar>(R.id.s_seekBar1)
         val green = findViewById<SeekBar>(R.id.s_seekBar2)
@@ -31,11 +33,15 @@ class SettingsActivity : AppCompatActivity() {
         oldGreen = intent.getStringExtra("G").toInt()
         oldBlue = intent.getStringExtra("B").toInt()
         oldSize = intent.getStringExtra("S").toInt()
+        oldKM = intent.getStringExtra("KM").toInt()
+
         red.progress = oldRed
         green.progress = oldGreen
         blue.progress = oldBlue
-        size.setText(oldSize.toString())
         color.setBackgroundColor(Color.rgb(oldRed,oldGreen,oldBlue))
+
+        size.setText(oldSize.toString())
+        editKM.setText(oldKM.toString())
 
         var newRed = oldRed
         var newGreen = oldGreen
@@ -79,6 +85,8 @@ class SettingsActivity : AppCompatActivity() {
             MainActivity.green = newGreen
             MainActivity.blue = newBlue
             MainActivity.size = size.text.toString().toInt()
+            MainActivity.km = editKM.text.toString().toInt()
+
             finish()
         }
 
@@ -87,6 +95,8 @@ class SettingsActivity : AppCompatActivity() {
             MainActivity.green = oldGreen
             MainActivity.blue = oldBlue
             MainActivity.size = oldSize
+            MainActivity.km = oldKM
+
             finish()
         }
     }

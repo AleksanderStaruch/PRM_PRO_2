@@ -6,6 +6,18 @@
     android:layout_height="match_parent"
     tools:context=".SettingsActivity">
 
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/settings"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
         android:layout_width="wrap_content"
@@ -140,21 +152,21 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="numberDecimal"
+        app:layout_constraintBottom_toBottomOf="@+id/ws_textSize"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toEndOf="@+id/ws_textSize"
         app:layout_constraintTop_toTopOf="@+id/ws_textSize" />
 
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/s_textKM"
+        android:layout_width="55dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
-        android:text="@string/settings"
-        android:textSize="25sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/km_radius"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/s_fontSize" />
 
     <LinearLayout
         android:id="@+id/linearLayout1"
@@ -197,5 +209,16 @@
             app:layout_constraintTop_toBottomOf="@+id/s_fontSize" />
 
     </LinearLayout>
+
+    <EditText
+        android:id="@+id/s_KM"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        app:layout_constraintBottom_toBottomOf="@+id/s_textKM"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/s_textKM"
+        app:layout_constraintTop_toTopOf="@+id/s_textKM" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

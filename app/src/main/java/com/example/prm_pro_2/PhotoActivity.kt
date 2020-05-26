@@ -63,22 +63,18 @@ class PhotoActivity : AppCompatActivity(), SurfaceHolder.Callback {
 
     @SuppressLint("InflateParams")
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun saveImage(bitmap: Bitmap) {
+    private fun savePhoto(bitmap: Bitmap) {
         val builder = AlertDialog.Builder(this)
         val inflater = layoutInflater
-        builder.setTitle("Write description")
+        builder.setTitle("Description")
         val dialogLayout: View = inflater.inflate(R.layout.description_dialog, null)
         val descField = dialogLayout.findViewById<EditText>(R.id.editText)
 
         builder.setView(dialogLayout)
         builder.setPositiveButton("Save") { _, _ ->
-            //TODO
-            if (descField.text.toString().length>500){
-                throw Exception("To big description")
-            }
             val geoPosition = getGeoPosition()
             val time = LocalDateTime.now()
-            val tmpBitmap = drawTextToBitmap(bitmap,geoPosition.country+" "+geoPosition.city+";"+time)
+            val tmpBitmap = drawTextToBitmap(bitmap,geoPosition.country+" "+geoPosition.city,time.toString())
             val photo = Photo(descField.text.toString(),geoPosition.toString(),time.toString())
             val id = readDataBase().size+1
             bitmapToFile(tmpBitmap,id)
@@ -105,27 +101,27 @@ class PhotoActivity : AppCompatActivity(), SurfaceHolder.Callback {
         return GeoPosition(data[3],data[1],location.latitude,location.longitude)
     }
 
-    private fun drawTextToBitmap(bitmap: Bitmap, infoText: String): Bitmap {
+    private fun drawTextToBitmap(bitmap: Bitmap, geoText: String, timeText: String): Bitmap {
         var tmpBitmap = bitmap
         var bitmapConfig = tmpBitmap.config
-        if (bitmapConfig == null) {
-            bitmapConfig = Bitmap.Config.ARGB_8888
-        }
+//        if (bitmapConfig == null) {
+//            bitmapConfig = Bitmap.Config.ARGB_8888
+//        }
         tmpBitmap = tmpBitmap.copy(bitmapConfig, true)
         val canvas = Canvas(tmpBitmap)
         val paint = Paint(Paint.ANTI_ALIAS_FLAG)
         paint.color = Color.rgb(red, green, blue)
-        paint.textSize = (fontSize * 1.0F)
+        paint.textSize = (fontSize * 1F)
         paint.setShadowLayer(1f, 0f, 1f, Color.DKGRAY)
 
         val bounds = Rect()
-        paint.getTextBounds(infoText, 0, infoText.length, bounds)
+        paint.getTextBounds(geoText, 0, geoText.length, bounds)
         val x = (tmpBitmap.width - bounds.width()) / 5F + 13F
         val y = (tmpBitmap.height + bounds.height()) / 5F
 
-        canvas.drawText(infoText.split(";")[0],x, y, paint)
-        canvas.drawText(infoText.split(";")[1],x, y+y/2, paint)
-        Log.println(Log.ERROR,"###########", "&&&&&&&&& is XY: $x $y")
+        canvas.drawText(geoText,x, y, paint)
+        canvas.drawText(timeText,x, y+y, paint)
+//        Log.println(Log.ERROR,"###########", "&&&&&&&&& is XY: $x $y")
         canvas.drawBitmap(tmpBitmap, Rect(0,0,200,200),bounds,null)
         return tmpBitmap
     }
@@ -171,7 +167,7 @@ class PhotoActivity : AppCompatActivity(), SurfaceHolder.Callback {
         }
         save.setOnClickListener {
             val bitmap1:Bitmap = imageView.drawable.toBitmap()
-            saveImage(bitmap1)
+            savePhoto(bitmap1)
         }
     }
 
