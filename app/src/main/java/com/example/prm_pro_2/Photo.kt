@@ -8,7 +8,10 @@ data class Photo(var desc: String, var geo: String, var dateTime: String){
     @PrimaryKey(autoGenerate = true) var id: Int = 0
 
     override fun toString(): String {
-        return "{\"desc\":$desc,\"geo\":$geo,\"time\":$dateTime,\"id\":$id}"
+        return "{\"desc\":$desc," + "\r\n"+
+                "\"geo\":$geo," + "\r\n"+
+                "\"time\":$dateTime," + "\r\n"+
+                "\"id\":$id}"
     }
 
 

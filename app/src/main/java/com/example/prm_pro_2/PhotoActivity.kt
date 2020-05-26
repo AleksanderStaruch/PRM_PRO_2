@@ -97,16 +97,12 @@ class PhotoActivity : AppCompatActivity(), SurfaceHolder.Callback {
         val location = locationManager.getLastKnownLocation(locationManager.allProviders[0])
         val geocoder = Geocoder(this, Locale.getDefault())
         val data = geocoder.getFromLocation(location.latitude, location.longitude, 1)[0].getAddressLine(0).split(",")
-//        Log.println(Log.ERROR,"########getGeoPosition","{\"country\":"+data[3]+",\"city\":"+data[1]+",\"s\":"+location.latitude+",\"d\":"+location.longitude+"}")
         return GeoPosition(data[3],data[1],location.latitude,location.longitude)
     }
 
     private fun drawTextToBitmap(bitmap: Bitmap, geoText: String, timeText: String): Bitmap {
         var tmpBitmap = bitmap
-        var bitmapConfig = tmpBitmap.config
-//        if (bitmapConfig == null) {
-//            bitmapConfig = Bitmap.Config.ARGB_8888
-//        }
+        val bitmapConfig = tmpBitmap.config
         tmpBitmap = tmpBitmap.copy(bitmapConfig, true)
         val canvas = Canvas(tmpBitmap)
         val paint = Paint(Paint.ANTI_ALIAS_FLAG)
@@ -116,7 +112,7 @@ class PhotoActivity : AppCompatActivity(), SurfaceHolder.Callback {
 
         val bounds = Rect()
         paint.getTextBounds(geoText, 0, geoText.length, bounds)
-        val x = (tmpBitmap.width - bounds.width()) / 5F + 13F
+        val x = (tmpBitmap.width - bounds.width()) / 5F
         val y = (tmpBitmap.height + bounds.height()) / 5F
 
         canvas.drawText(geoText,x, y, paint)
@@ -134,11 +130,10 @@ class PhotoActivity : AppCompatActivity(), SurfaceHolder.Callback {
             bitmap.compress(Bitmap.CompressFormat.JPEG,100,outputStream)
             outputStream.flush()
             outputStream.close()
-
-            Log.println(Log.ERROR,"####bitmapToFile",""+id)
+//            Log.println(Log.ERROR,"####bitmapToFile",""+id)
         }catch (e: IOException){
             e.printStackTrace()
-            Log.println(Log.ERROR,"#####bitmapToFile", "ERROR $id")
+            Log.println(Log.ERROR,"#####bitmapToFile", "ERROR $e")
         }
         return Uri.parse(path.absolutePath)
     }

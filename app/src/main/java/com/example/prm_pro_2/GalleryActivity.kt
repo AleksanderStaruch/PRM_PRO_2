@@ -3,19 +3,20 @@ package com.example.prm_pro_2
 import android.content.Context
 import android.content.ContextWrapper
 import android.graphics.BitmapFactory
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.method.ScrollingMovementMethod
 import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.drawable.toBitmap
 import androidx.room.Room
 import java.io.File
 import java.io.FileInputStream
 import java.io.IOException
-import java.lang.Exception
 import kotlin.concurrent.thread
+
 
 class GalleryActivity : AppCompatActivity() {
 
